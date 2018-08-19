@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"os"
+	"io"
 )
 
 const (
@@ -45,6 +46,10 @@ func setupRouter() *gin.Engine {
 }
 
 func main() {
+	// Logging to a file.
+	f, _ := os.Create("/tmp/app.log")
+	gin.DefaultWriter = io.MultiWriter(f)
+
 	r := setupRouter()
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
