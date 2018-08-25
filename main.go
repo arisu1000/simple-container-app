@@ -50,6 +50,9 @@ func main() {
 	f, _ := os.Create("/tmp/app.log")
 	gin.DefaultWriter = io.MultiWriter(f)
 
+	// Use the following code if you need to write the logs to file and console at the same time.
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+
 	r := setupRouter()
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
